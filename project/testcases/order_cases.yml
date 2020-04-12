@@ -1,0 +1,32 @@
+- config:
+    name: 查询订单
+    base_url: http://192.168.0.120:8080
+    variables:
+      status: 0
+      username: admin1
+      password: admin1
+      sql: select film_type from guns_rest.mooc_film_t where uuid='2'
+      sql_data: ${MYSQL($sql,film_type)}
+
+- test:
+    name: 用户登陆
+    api: api/login.yml
+    variables:
+      userName: $username
+      password: $password
+    extract:
+      data_token: json.data.token
+    validate:
+      - eq: [json.status,$status]
+
+- test:
+    name: 获取订单信息
+    api: api/order_info.yml
+    variables:
+      token: ${authorization($data_token)}
+
+    validate:
+      - eq: [json.status,$status]
+      - str_eq: ["$sql_data","0"]
+
+

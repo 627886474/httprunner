@@ -1,0 +1,16 @@
+name: 获取订单信息
+base_url: http://192.168.0.120:8080
+variables:
+  status: 0
+  token: Bearer eyJhbGciOiJIUzUxMiJ9.eyJyYW5kb21LZXkiOiJsaDZwZ3UiLCJzdWIiOiI3IiwiZXhwIjoxNTg2MDcwODg1LCJpYXQiOjE1ODU0NjYwODV9.IJ4StmWWiBOnKiEs2Cs-whQp5Vl91N3V0Tjw9o0c8_kft3H1Id-TaoDKODGcpU0f8Eu85NOsi7Bc6jSG6WZnbw
+request:
+  url: /order/getOrderInfo
+  method: POST
+  headers:
+    Content-Type: application/x-www-form-urlencoded
+    Authorization: $token
+  params:
+    nowPage: 1
+    pageSize: 5
+validate:
+  - eq: [json.status,$status]

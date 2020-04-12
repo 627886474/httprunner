@@ -1,0 +1,14 @@
+name: 用户登陆
+base_url: http://192.168.0.120:8080
+variables:
+  status: 0
+  username: admin1
+  password: admin1
+request:
+  url: /auth
+  method: POST
+  params:
+    userName: $username
+    password: $password
+validate:
+  - eq: [json.status,$status]

@@ -1,0 +1,7 @@
+config:
+  name: 订单相关测试用例合集
+
+testcases:
+  -
+    name: 查询订单
+    testcase: testcases/order_cases.yml
